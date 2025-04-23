@@ -1,11 +1,23 @@
 -- =========================
--- z1960727 Justin Carney  |
--- z2051554 Aasim Ghani    |
+-- Justin Carney z1960727  |
+-- Aasim Ghani  z2051554   |
 -- Tyler Rouw 21942888     |
 -- Liam Belh z2047328      |
 -- Trevor Jannsen z2036452 |
 -- =========================
 
+-- ==================================
+-- Drop existing tables (if needed) |
+-- ==================================
+
+DROP TABLE IF EXISTS OrderDetail;
+DROP TABLE IF EXISTS `Order`;
+DROP TABLE IF EXISTS Product;
+DROP TABLE IF EXISTS User;
+
+-- ====================
+-- Create User Table  |
+-- ====================
 CREATE TABLE User (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -14,6 +26,9 @@ CREATE TABLE User (
     role ENUM('customer', 'employee') DEFAULT 'customer'
 );
 
+-- ======================
+-- Create Product Table |
+-- ======================
 CREATE TABLE Product (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -22,6 +37,9 @@ CREATE TABLE Product (
     stock_quantity INT NOT NULL
 );
 
+-- ======================
+-- | Create Order Table |
+-- ======================
 CREATE TABLE `Order` (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -32,6 +50,9 @@ CREATE TABLE `Order` (
     FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
+-- ==========================
+-- Create OrderDetail Table |
+-- ==========================
 CREATE TABLE OrderDetail (
     order_id INT,
     product_id INT,
